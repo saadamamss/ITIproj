@@ -35,10 +35,10 @@
                             @auth
 
                             <li><i class="fi-rs-user"></i>{{Auth::user()->name}} &ThickSpace; /
-                            <form action="{{route('logout')}}" method="post">
-                                @csrf
-                                <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closeset('form').submit();">Logout</a>
-                            </form>
+                                <form action="{{route('logout')}}" method="post">
+                                    @csrf
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                </form>
                             </li>
                             @else
                             <li><i class="fi-rs-key"></i><a href="{{route('login')}}">Log In </a> / <a href="{{route('register')}}">Sign Up</a></li>
