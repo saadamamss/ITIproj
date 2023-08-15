@@ -44,6 +44,7 @@ Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function(){
     Route::post('products/add' , [ProductController::class , 'addProduct'])->name('addproducts');
     Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
     Route::post('product/edit' , [ProductController::class , 'Productedit'])->name('productedit');
+    Route::delete('product/delete/' , [ProductController::class , 'Productdel'])->name('productdel');
 
 
 

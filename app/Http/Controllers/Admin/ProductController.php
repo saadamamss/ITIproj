@@ -57,9 +57,9 @@ class ProductController extends Controller
 
             try {
                 $product->save();
-                return true;
+                return response()->json(true);
             } catch (Exception $exc) {
-                return false;
+                return response()->json(false);
             }
         }
     }
@@ -112,9 +112,28 @@ class ProductController extends Controller
 
             try {
                 $product->save();
-                return true;
+                return response()->json(true);
             } catch (Exception $exc) {
-                return false;
+                return response()->json(false);
+            }
+        }
+    }
+
+    public function Productdel(Request $request)
+    {
+
+        if ($request->isMethod('delete') && $request->ajax()) {
+            $validated = $request->validate([
+                'id'=>"required|numeric"
+            ]);
+
+            try {
+
+                Product::findOrFail($request->input('id'))->delete();
+                
+                return response()->json(true);
+            } catch (\Throwable $th) {
+                return response()->json(false);
             }
         }
     }

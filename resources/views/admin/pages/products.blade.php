@@ -37,6 +37,7 @@
                 <table id="zero_config" class="table table-striped">
                   <thead>
                     <tr>
+                      <th class="d-none">id</th>
                       <th>Name</th>
                       <th>price</th>
                       <th>Sale Price</th>
@@ -48,6 +49,7 @@
                   <tbody>
                     @forelse ($products as $item)
                         <tr>
+                          <td class="d-none">{{$item->id}}</td>
                           <td>{{$item->name}}</td>
                           <td>{{$item->price}}</td>
                           <td>{{$item->sale_price}}</td>
@@ -55,7 +57,7 @@
                           <td>{{$item->quantity}}</td>
                           <td>
                           <button class="btn btn-warning btn-sm editproducts" data-id='{{$item->id}}'>Edit</button>
-                          <button class="btn btn-danger btn-sm">del</button>
+                          <button class="btn btn-danger btn-sm delproduct" data-id='{{$item->id}}'>del</button>
                           </td>
                         </tr>
                     @empty
@@ -193,6 +195,34 @@
     const form = document.querySelector("#addProductForm");
 
    
+    $(document).on('click', '.delproduct' , function(e){
+      e.preventDefault();
+
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        });
+      $.ajax({
+        url: "{{route('productdel')}}",
+        type: "delete",
+        data:{id:$(this).data('id')},
+        datatype:'json',
+        success: function (response) {
+          console.log(response);
+          if(response === true){
+            
+            location.reload();
+          }
+        },
+        error: function(res) {
+            var errors = res.responseJSON.errors;
+            console.log(errors);
+
+        }
+    });
+
+    });
     $('#addProductForm').on('submit' , function(e){
       e.preventDefault();
 
@@ -212,8 +242,8 @@
         datatype:'json',
         success: function (response) {
           console.log(response);
-          if(response === '1'){
-            console.log('successfull');
+          if(response === true){
+            
             location.reload();
           }
         },
@@ -237,7 +267,7 @@
       showmodal();
     });
 
-    $('.editproducts').on('click' , function(){
+    $(document).on('click', '.editproducts' , function(){
       const id = $(this).data('id');
       $.ajaxSetup({
             headers: {
