@@ -28,40 +28,43 @@ class ProductController extends Controller
 
     public function addProduct(Request $request)
     {
+        if ($request->isMethod('post') && $request->ajax()) {
+            $validated = $request->validate([
+                'name' => 'required|string|min:1|max:100',
+                'price' => 'required|numeric',
+                'sale_price' => 'nullable|numeric',
+                'quantity' => 'required|numeric',
+                'desc' => 'required|string',
+                'category' => 'required|string',
+                'stock' => 'required|string',
+                'featured' => 'required|boolean',
+            ]);
 
-        $validated = $request->validate([
-            'name' => 'required|string|min:1|max:100',
-            'price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
-            'quantity' => 'required|numeric',
-            'desc' => 'required|string',
-            'category' => 'required|string',
-            'stock' => 'required|string',
-            'featured' => 'required|boolean',
-        ]);
-
-        $product = new Product();
+            $product = new Product();
 
 
-        $product->name = $request->input('name');
-        $product->slug = Str::slug($request->input('name'));
-        $product->price = $request->input('price');
-        $product->sale_price = $request->input('sale_price');
-        $product->quantity = $request->input('quantity');
-        $product->desc = $request->input('desc');
-        $product->stock = $request->input('stock');
-        $product->featured = $request->input('featured');
-        $product->image = "product.png";
-        $product->images = Null;
-        $product->cat_id = $request->input('category');
+            $product->name = $request->input('name');
+            $product->slug = Str::slug($request->input('name'));
+            $product->price = $request->input('price');
+            $product->sale_price = $request->input('sale_price');
+            $product->quantity = $request->input('quantity');
+            $product->desc = $request->input('desc');
+            $product->stock = $request->input('stock');
+            $product->featured = $request->input('featured');
+            $product->image = "product.png";
+            $product->images = Null;
+            $product->cat_id = $request->input('category');
 
-        try {
-            $product->save();
-            return true;
-        } catch (Exception $exc) {
-            return false;
+            try {
+                $product->save();
+                return true;
+            } catch (Exception $exc) {
+                return false;
+            }
         }
     }
+
+
     public function Productdetails(Request $request)
     {
         if ($request->isMethod('post') && $request->ajax()) {
@@ -90,28 +93,29 @@ class ProductController extends Controller
                 'stock' => 'required|string',
                 'featured' => 'required|boolean',
             ]);
-        }
 
 
-        $product = Product::findOrFail($request->input('product_id'));
 
-        if ($product) {
-            $product->name = $request->input('name');
-            $product->slug = Str::slug($request->input('name'));
-            $product->price = $request->input('price');
-            $product->sale_price = $request->input('sale_price');
-            $product->quantity = $request->input('quantity');
-            $product->desc = $request->input('desc');
-            $product->cat_id = $request->input('category');
-            $product->stock = $request->input('stock');
-            $product->featured = $request->input('featured');
-        }
+            $product = Product::findOrFail($request->input('product_id'));
 
-        try {
-            $product->save();
-            return true;
-        } catch (Exception $exc) {
-            return false;
+            if ($product) {
+                $product->name = $request->input('name');
+                $product->slug = Str::slug($request->input('name'));
+                $product->price = $request->input('price');
+                $product->sale_price = $request->input('sale_price');
+                $product->quantity = $request->input('quantity');
+                $product->desc = $request->input('desc');
+                $product->cat_id = $request->input('category');
+                $product->stock = $request->input('stock');
+                $product->featured = $request->input('featured');
+            }
+
+            try {
+                $product->save();
+                return true;
+            } catch (Exception $exc) {
+                return false;
+            }
         }
     }
 }
