@@ -3,7 +3,7 @@ table.dataTable {
   margin-top: 6px !important;
   margin-bottom: 6px !important;
   max-width: none !important;
-  border-collapse: separate !important;
+  /*border-collapse: separate !important;*/
 }
 table.dataTable td,
 table.dataTable th {
@@ -23,6 +23,7 @@ div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;
   white-space: nowrap;
+  padding: 10px 0px;
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: 75px;
@@ -35,6 +36,7 @@ div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
   white-space: nowrap;
   text-align: left;
+  padding: 10px 0px;
 }
 div.dataTables_wrapper div.dataTables_filter input {
   margin-left: 0.5em;

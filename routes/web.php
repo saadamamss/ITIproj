@@ -41,5 +41,11 @@ Route::middleware(['auth'])->group(function(){
 Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function(){
     Route::get('dashboard' , [AdminDashboard::class , 'index'])->name('admindashboard');
     Route::get('products' , [ProductController::class , 'index'])->name('products');
+    Route::post('products/add' , [ProductController::class , 'addProduct'])->name('addproducts');
+    Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
+    Route::post('product/edit' , [ProductController::class , 'Productedit'])->name('productedit');
+
+
+
 });
 

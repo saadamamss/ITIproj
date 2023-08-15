@@ -19,6 +19,8 @@
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('adminassets/images/favicon.png')}}" />
   <!-- Custom CSS -->
+  <!-- <link rel="stylesheet" href="{{asset('adminassets/css/bootstrap.min.css')}}">
+   -->
   <link href="{{asset('adminassets/css/style.min.css')}}" rel="stylesheet" />
   <link href="{{asset('adminassets/css/dataTables.bootstrap4.css')}}" rel="stylesheet" />
 </head>
@@ -52,12 +54,15 @@
   
     <!-- this page js -->
     <script src="{{asset('adminassets/js/datatables.min.js')}}"></script>
+
     <script>
       /****************************************
        *       Basic Table                   *
        ****************************************/
       $("#zero_config").DataTable();
     </script>
+
+    @yield('scripts')
 </body>
 
 </html>

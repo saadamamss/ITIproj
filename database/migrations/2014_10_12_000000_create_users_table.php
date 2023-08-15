@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->text('avatar')->nullable();
-            $table->string('UType')->default("USR")->Comment("ADM for Admin and USR for Customer");
+            $table->enum('UType' , ['USR','ADM'])->default('USR')->comment('ADM for Admin and USR for customers');
             $table->timestamps();
         });
     }
