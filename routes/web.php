@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/shop', function () {
@@ -34,30 +35,30 @@ Route::get('/blog', function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('dashboard' , function(){
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', function () {
         return '<h1>user.dashboard</h1>';
     });
 });
 
-Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function () {
 
-    Route::get('dashboard' , [AdminDashboard::class , 'index'])->name('admindashboard');
+    Route::get('dashboard', [AdminDashboard::class, 'index'])->name('admindashboard');
 
-    Route::get('mainsettings' , [SettingsController::class , 'index'])->name('mainsettings');
-    Route::post('mainsettings/edit' , [SettingsController::class , 'mainSettingsedit'])->name('mainsettings.edit');
-
-    Route::get('products' , [ProductController::class , 'index'])->name('products');
-    Route::post('products/add' , [ProductController::class , 'addProduct'])->name('addproducts');
-    //Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
-    Route::post('product/edit' , [ProductController::class , 'Productedit'])->name('productedit');
-    Route::delete('product/delete/' , [ProductController::class , 'Productdel'])->name('productdel');
+    //main settings
+    Route::get('mainsettings', [SettingsController::class, 'index'])->name('mainsettings');
+    Route::post('mainsettings/edit', [SettingsController::class, 'mainSettingsedit'])->name('mainsettings.edit');
     
-    Route::get('categories' , [CategoryController::class , 'index'])->name('categories');
-    Route::post('category/add' , [CategoryController::class , 'addCategory'])->name('catg.add');
-    Route::post('category/edit' , [CategoryController::class , 'editCategory'])->name('catg.edit');
-    Route::delete('category/delete/' , [CategoryController::class , 'delCategory'])->name('catg.del');
-
+    //categories
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories');
+    Route::post('category/add', [CategoryController::class, 'addCategory'])->name('catg.add');
+    Route::post('category/edit', [CategoryController::class, 'editCategory'])->name('catg.edit');
+    Route::delete('category/delete/', [CategoryController::class, 'delCategory'])->name('catg.del');
+    
+    //products
+    Route::get('products', [ProductController::class, 'index'])->name('products');
+    Route::post('products/add', [ProductController::class, 'addProduct'])->name('addproducts');
+    Route::post('product/edit', [ProductController::class, 'Productedit'])->name('productedit');
+    Route::delete('product/delete/', [ProductController::class, 'Productdel'])->name('productdel');
 
 });
-
