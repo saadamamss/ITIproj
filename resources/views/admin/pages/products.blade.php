@@ -39,6 +39,7 @@
                     <tr>
                       <th class="d-none">id</th>
                       <th>Name</th>
+                      <th>category</th>
                       <th>price</th>
                       <th>Sale Price</th>
                       <th>Stock</th>
@@ -51,6 +52,7 @@
                         <tr>
                           <td class="d-none">{{$item->id}}</td>
                           <td>{{$item->name}}</td>
+                          <td>{{$item->category->name}}</td>
                           <td>{{$item->price}}</td>
                           <td>{{$item->sale_price}}</td>
                           <td>{{$item->stock}}</td>
@@ -192,6 +194,7 @@
   
   <script>
     const products = {{Js::from($products)}}
+    console.log(products);
     const form = document.querySelector("#addProductForm");
    
    

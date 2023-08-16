@@ -12,8 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-
-        $catgs = DB::table('categories')->get();
+        $catgs = Category::get();
 
         return view("admin.pages.categories")->with(['categories' => $catgs]);
     }

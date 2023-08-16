@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class ProductController extends Controller
     {
 
 
-        $products = DB::table('products')->get();
-        $catgs = DB::table('categories')->get();
+        $products = Product::get();
+        $catgs = Category::get();
+
         return view('admin.pages.products')->with([
             'products' => $products,
             'catgs' => $catgs

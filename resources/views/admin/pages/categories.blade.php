@@ -39,6 +39,7 @@
                     <tr>
                       <th>id</th>
                       <th>Name</th>
+                      <th>has</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -47,6 +48,7 @@
                         <tr>
                           <td>{{$item->id}}</td>
                           <td>{{$item->name}}</td>
+                          <td>{{count($item->products)}}</td>
                           <td>
                           <button class="btn btn-warning btn-sm editcategories" data-id='{{$item->id}}'>Edit</button>
                           <button class="btn btn-danger btn-sm delcategory" data-id='{{$item->id}}'>del</button>
