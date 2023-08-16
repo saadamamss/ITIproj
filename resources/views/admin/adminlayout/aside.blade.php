@@ -10,6 +10,11 @@
           </li>
           
           <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('mainsettings')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Main Settings</span></a>
+          </li>
+
+          <li class="sidebar-item">
             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products')}}" aria-expanded="false"><i
                 class="mdi mdi-receipt"></i><span class="hide-menu">Products</span></a>
           </li>

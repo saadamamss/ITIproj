@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,12 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function(){
+
     Route::get('dashboard' , [AdminDashboard::class , 'index'])->name('admindashboard');
+
+    Route::get('mainsettings' , [SettingsController::class , 'index'])->name('mainsettings');
+    Route::post('mainsettings/edit' , [SettingsController::class , 'mainSettingsedit'])->name('mainsettings.edit');
+
     Route::get('products' , [ProductController::class , 'index'])->name('products');
     Route::post('products/add' , [ProductController::class , 'addProduct'])->name('addproducts');
     //Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
