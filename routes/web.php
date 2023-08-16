@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
