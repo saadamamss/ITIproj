@@ -14,6 +14,13 @@
                 class="mdi mdi-receipt"></i><span class="hide-menu">Products</span></a>
           </li>
 
+          
+          <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('categories')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Categories</span></a>
+          </li>
+
+
           {{--
           <li class="sidebar-item">
             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"

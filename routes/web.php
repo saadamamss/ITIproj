@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,10 +43,14 @@ Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function(){
     Route::get('dashboard' , [AdminDashboard::class , 'index'])->name('admindashboard');
     Route::get('products' , [ProductController::class , 'index'])->name('products');
     Route::post('products/add' , [ProductController::class , 'addProduct'])->name('addproducts');
-    Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
+    //Route::post('product/details' , [ProductController::class , 'Productdetails'])->name('productdetails');
     Route::post('product/edit' , [ProductController::class , 'Productedit'])->name('productedit');
     Route::delete('product/delete/' , [ProductController::class , 'Productdel'])->name('productdel');
-
+    
+    Route::get('categories' , [CategoryController::class , 'index'])->name('categories');
+    Route::post('category/add' , [CategoryController::class , 'addCategory'])->name('catg.add');
+    Route::post('category/edit' , [CategoryController::class , 'editCategory'])->name('catg.edit');
+    Route::delete('category/delete/' , [CategoryController::class , 'delCategory'])->name('catg.del');
 
 
 });

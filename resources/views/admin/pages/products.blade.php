@@ -190,10 +190,10 @@
 
   @section('scripts')
   
-  
   <script>
+    const products = {{Js::from($products)}}
     const form = document.querySelector("#addProductForm");
-
+   
    
     $(document).on('click', '.delproduct' , function(e){
       e.preventDefault();
@@ -211,7 +211,6 @@
         success: function (response) {
           console.log(response);
           if(response === true){
-            
             location.reload();
           }
         },
@@ -229,7 +228,6 @@
       const data = $(this).serialize();
       const url = $(this).attr('action');
 
-      console.log($(this).attr('action'));
       $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -243,7 +241,6 @@
         success: function (response) {
           console.log(response);
           if(response === true){
-            
             location.reload();
           }
         },
@@ -256,7 +253,6 @@
         }
     });
     
-
     });
 
     $('#addNewProduct').on('click' , function(){
@@ -267,15 +263,44 @@
       showmodal();
     });
 
+
     $(document).on('click', '.editproducts' , function(){
       const id = $(this).data('id');
+      var product;
+      products.forEach(element => {
+        if(element.id == id){
+          product = element;
+          return;
+        }
+      });
+
+      if(product){
+        form.elements.name.value = product.name;
+        form.elements.price.value = product.price;
+        form.elements.sale_price.value = product.sale_price;
+        form.elements.quantity.value = product.quantity;
+        form.elements.desc.value = product.desc;
+        form.elements.category.value = product.cat_id;
+        form.elements.featured.value = product.featured;
+        form.elements.stock.value = product.stock;
+        form.action = `{{route('productedit')}}`;
+        form.elements.submit.value = 'Edit';
+        form.elements.product_id.value = product.id;
+
+        $('#addProductModalLabel').text('Edit Product');
+        showmodal();
+
+      }else{
+        console.log('not found');
+      }
+      /*
       $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             }
         });
       $.ajax({
-        url: "{{route('productdetails')}}",
+        url: "{{--route('productdetails')--}}",
         type: "post",
         data:{'id':id},
         datatype:'json',
@@ -302,7 +327,7 @@
            console.log(textStatus, errorThrown);
         }
     });
-
+*/
     });
     
   </script>
