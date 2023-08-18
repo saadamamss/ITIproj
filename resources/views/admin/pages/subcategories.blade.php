@@ -14,7 +14,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admindashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    <a href="{{ route('categories') }}">Categories</a>
+                                    <a href="{{ route('subcategories') }}">Categories</a>
                                 </li>
                                 </li>
                             </ol>
@@ -39,16 +39,16 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Name</th>
-                                            <th>no.of Products</th>
+                                            <th>category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($categories as $item)
+                                        @forelse ($subcatgs as $item)
                                             <tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ count($item->products) }}</td>
+                                                <td>{{ $item->category->name }}</td>
                                                 <td>
                                                     <button class="btn btn-warning btn-sm editcategories"
                                                         data-id='{{ $item->id }}'>Edit</button>
@@ -87,7 +87,7 @@
                         <h5 class="modal-title" id="addcategoryModalLabel">New category</h5>
                     </div>
                     <div class="modal-body border-bottom px-0">
-                        <form action="{{ route('catg.add') }}" method="post" enctype="multipart/form-data"
+                        <form action="{{ route('subcatg.add') }}" method="post" enctype="multipart/form-data"
                             id="addcategoryForm">
                             @csrf
                             <div class="inputfields px-4">
@@ -96,6 +96,19 @@
                                     <input type="text" id="name" name="name"
                                         class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
                                         required autofocus />
+                                    <span class="text-danger" id="error_name"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category">Category:</label>
+                                    <select class="form-control" id="category" name="category">
+                                        @forelse ($catgs as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @empty
+                                            <option value="">no categories</option>
+                                        @endforelse
+
+                                    </select>
                                     <span class="text-danger" id="error_name"></span>
                                 </div>
 
@@ -117,7 +130,7 @@
 
     @section('scripts')
         <script>
-            const categories = {{ Js::from($categories) }}
+            const categories = {{ Js::from($subcatgs) }}
             const form = document.querySelector("#addcategoryForm");
 
 
@@ -130,7 +143,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('catg.del') }}",
+                    url: "{{ route('subcatg.del') }}",
                     type: "delete",
                     data: {
                         id: $(this).data('id')
@@ -184,7 +197,7 @@
             });
 
             $('#addNewcategory').on('click', function() {
-                form.action = `{{ route('catg.add') }}`;
+                form.action = `{{ route('subcatg.add') }}`;
                 form.submit.value = 'Add';
                 form.reset();
                 $('#addcategoryModalLabel').text('Add New category');
@@ -204,7 +217,7 @@
 
                 if (category) {
                     form.elements.name.value = category.name;
-                    form.action = `{{ route('catg.edit') }}`;
+                    form.action = `{{ route('subcatg.edit') }}`;
                     form.elements.submit.value = 'Edit';
                     form.elements.category_id.value = category.id;
 

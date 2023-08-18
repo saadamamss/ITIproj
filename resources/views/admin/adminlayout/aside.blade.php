@@ -13,17 +13,31 @@
             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('mainsettings')}}" aria-expanded="false"><i
                 class="mdi mdi-receipt"></i><span class="hide-menu">Main Settings</span></a>
           </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('categories')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Categories</span></a>
+          </li>
+          
+          <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('subcategories')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Sub-Categories</span></a>
+          </li>
 
           <li class="sidebar-item">
             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products')}}" aria-expanded="false"><i
                 class="mdi mdi-receipt"></i><span class="hide-menu">Products</span></a>
           </li>
 
-          
           <li class="sidebar-item">
-            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('categories')}}" aria-expanded="false"><i
-                class="mdi mdi-receipt"></i><span class="hide-menu">Categories</span></a>
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('gallery.index')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Gallery</span></a>
           </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('reviews.index')}}" aria-expanded="false"><i
+                class="mdi mdi-receipt"></i><span class="hide-menu">Reviews</span></a>
+          </li>
+
+        
 
 
           {{--

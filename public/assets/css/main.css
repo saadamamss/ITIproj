@@ -9945,3 +9945,12 @@ span.fi-rs-apps {
 	}  
 }
 
+
+.img-card{
+  position: relative;
+}
+.img-card p{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
