@@ -3626,24 +3626,33 @@ table .product-thumbnail img {
   text-decoration: line-through;
 }
 
-.product-cart-wrap .product-content-wrap .rating-result {
+.product-cart-wrap .product-content-wrap .rating-result,
+.product-detail .rating-result 
+{
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: inline-flex;
 }
 
-.product-cart-wrap .product-content-wrap .rating-result > span {
+.product-cart-wrap .product-content-wrap .rating-result > span,
+.product-detail .rating-result > span {
   display: block;
   overflow: hidden;
   margin-left: 5px;
 }
 
-.product-cart-wrap .product-content-wrap .rating-result::before {
+.product-cart-wrap .product-content-wrap .rating-result::before ,
+.product-detail .rating-result::before {
   font-family: "uicons-regular-straight"  !important;
   font-size: 11px;
   letter-spacing: 2px;
-  content: '\f225' '\f225' '\f225' '\f225' '\f225';
+  content: '\f225';
   color: #ffb300;
+  display: inline-block;
+}
+.product-cart-wrap .product-content-wrap .rating-result.dark::before ,
+.product-detail .rating-result.dark::before {
+  color: #ddd;
 }
 
 .product-cart-wrap .product-content-wrap .add-to-cart {
@@ -4340,31 +4349,34 @@ table .product-thumbnail img {
 }
 
 .detail-qty {
-  max-width: 80px;
+  max-width: fit-content;
   padding: 9px 20px;
   position: relative;
   width: 100%;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .detail-qty > a {
   font-size: 16px;
-  position: absolute;
-  right: 8px;
   color: #707070;
+  background-color: #fbeded;
+  border-radius: 50%;
+  padding: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 2px;
+
 }
 
 .detail-qty > a:hover {
   color: #F15412;
+  box-shadow: 0 0 2px 0px #bbb;
 }
 
-.detail-qty > a.qty-up {
-  top: 0;
-}
-
-.detail-qty > a.qty-down {
-  bottom: 0;
-}
 
 .attr-detail .select-box select {
   height: 40px;
@@ -7342,8 +7354,8 @@ span.fi-rs-apps {
 }
 
 .pagination-area .page-item:last-child .page-link {
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .pagination-area .page-item.active .page-link, .pagination-area .page-item:hover .page-link {

@@ -18,13 +18,16 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('desc')->nullable();
-            $table->decimal('price',8,2);
-            $table->decimal('sale_price',8,2)->nullable();
-            $table->enum('stock',['in','out'])->default('in');
+            $table->decimal('price', 8, 2);
+            $table->decimal('sale_price', 8, 2)->nullable();
+            $table->enum('stock', ['in', 'out'])->default('in');
             $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(0);
             $table->string('image');
             $table->text('images')->nullable();
+            $table->enum('rating', ['0', '1', '2', '3', '4', '5'])->default(0);
+            $table->enum('color' , ['red','green','blue','black','white'])->default(NULL);
+            $table->enum('size' , ['s','m','l','xl','xxl'])->default(NULL);
             $table->bigInteger('cat_id')->unsigned()->nullable();
             $table->timestamps();
 

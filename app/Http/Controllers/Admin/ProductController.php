@@ -16,6 +16,7 @@ class ProductController extends Controller
     {
 
 
+
         $products = Product::get();
         $catgs = Category::get();
 
@@ -55,6 +56,7 @@ class ProductController extends Controller
                 $product->featured = $request->input('featured');
                 $product->image = "product.png";
                 $product->images = Null;
+                $product->rating = 0;
                 $product->cat_id = $request->input('category');
 
                 $product->save();

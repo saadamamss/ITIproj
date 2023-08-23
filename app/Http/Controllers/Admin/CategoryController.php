@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -20,14 +21,23 @@ class CategoryController extends Controller
     public function addCategory(Request $request)
     {
         if ($request->isMethod('post') && $request->ajax()) {
-            $request->validate(['name' => 'required|string|max:60']);
-
-            $catg = new Category();
-
-            $catg->name = $request->name;
-            $catg->slug = Str::slug($request->name);
+            $request->validate([
+                'name' => 'required|string|max:60',
+                'image' => 'required|image'
+            ]);
 
             try {
+
+                $catg = new Category();
+
+                $catg->name = $request->name;
+                $catg->slug = Str::slug($request->name);
+
+
+                $imgName = $request->file('image')->getClientOriginalName();
+                $request->file('image')->storeAs('shop', $imgName, 'upload');
+                $catg->image = $imgName;
+
                 $catg->save();
                 return response()->json(true);
             } catch (\Throwable $th) {
@@ -42,16 +52,21 @@ class CategoryController extends Controller
             $request->validate(
                 [
                     'category_id' => 'required|numeric',
-                    'name' => 'required|string|max:60'
-
+                    'name' => 'required|string|max:60',
+                    'image' => 'nullable|image'
                 ]
             );
 
             try {
                 $catg = Category::findOrFail($request->category_id);
-
                 $catg->name = $request->name;
                 $catg->slug = Str::slug($request->name);
+
+                if ($request->file('image')) {
+                    $imgName = $request->file('image')->getClientOriginalName();
+                    $request->file('image')->storeAs('shop', $imgName, 'upload');
+                    $catg->image = $imgName;
+                }
 
                 $catg->save();
                 return response()->json(true);

@@ -64,7 +64,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        
+
                                         <div class="form-group col-md-6 col-12">
                                             <label for="paragraph">paragraph:</label>
                                             <input type="text" id="paragraph" name="paragraph"
@@ -117,7 +117,8 @@
 
                             </div>
                             <div class="row m-0">
-                                @forelse ($galleries as $item)
+                                {{--
+                                @forelse ($files as $item)
                                     <div class="img-card col-md-4 col-sm-6 col-12">
                                         <p>
                                             <input type="checkbox" class="form-check-input" name="photos[]"
@@ -137,8 +138,12 @@
                                         </p>
 
                                         <div class="img">
+                                           
                                             <img src="{{ asset($item->path . '/' . $item->image) }}" width="100%"
                                                 height="200px" alt="">
+                                           
+
+                           
                                         </div>
                                         <div class="img-title text-center py-2">
                                             <span>{{ $item->title }}</span>
@@ -149,7 +154,20 @@
 
                                     <h5 align="center">NO Images In Gallery</h5>
                                 @endforelse
+                                    --}}
 
+                                <ul>
+                                    @forelse ($files as $file)
+                                        <li>
+
+                                            <img src="{{ asset('assets/imgs/') . '/' . $file }}" alt=""
+                                                width="100px" height="100px">
+                                            <span>{{$file}}</span>
+
+                                        </li>
+                                    @empty
+                                    @endforelse
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -186,7 +204,7 @@
     @section('scripts')
         <script>
             const form = document.querySelector("#addGalleryForm");
-            const galleries = {{ Js::from($galleries) }};
+            const galleries = ['saad']; //{{-- Js::from($galleries) --}};
 
             $(document).on('click', ".delphoto", function() {
                 $('#confirmModal').modal({
@@ -339,7 +357,7 @@
 
         .controll {
             position: relative;
-         
+
         }
     </style>
 @endsection

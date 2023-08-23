@@ -14,9 +14,26 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        $galleries = DB::table('galleries')->orderBy('id', 'DESC')->paginate(12);
 
-        return view('admin.pages.gallery')->with(['galleries' => $galleries]);
+        $files = Storage::disk('upload')->directories();
+
+        return view('admin.pages.gallery')->with(['files' => $files]);
+        
+
+        //$galleries = DB::table('galleries')->orderBy('id', 'DESC')->paginate(12);
+
+        //return view('admin.pages.gallery')->with(['galleries' => $galleries]);
+
+    }
+    public function getfiles($dir)
+    {
+        $dirs = Storage::disk('upload')->directories();
+
+        if (in_array($dir, $dirs)) {
+            $files = Storage::disk('upload')->files($dir);
+        } else {
+        }
+        return view('admin.pages.gallery')->with(['files' => $files]);
     }
     public function store(Request $request)
     {

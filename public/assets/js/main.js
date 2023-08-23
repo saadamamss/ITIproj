@@ -39,7 +39,7 @@
     if ($('.sticky-sidebar').length) { 
         $('.sticky-sidebar').theiaStickySidebar();
     }
-
+/*
     // Slider Range JS 
     if ( $("#slider-range").length ) {
         $("#slider-range").slider({
@@ -51,10 +51,11 @@
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
             }
         });
+
         $("#amount").val("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
     }  
-
+*/
     /*------ Hero slider 1 ----*/
     $('.hero-slider-1').slick({
         slidesToShow: 1,
@@ -343,19 +344,25 @@
         Price range
     --------------------- */
     var sliderrange = $('#slider-range');
-    var amountprice = $('#amount');
+
+    const minprice = $('#minprice');
+    const maxprice = $('#maxprice');
     $(function() {
         sliderrange.slider({
             range: true,
-            min: 16,
-            max: 400,
-            values: [0, 300],
+            min: 0,
+            max: 1000,
+            values: [parseInt(minprice.val()), parseInt(maxprice.val())],
             slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                
+                minprice.val(ui.values[0]);
+                maxprice.val(ui.values[1]);
             }
+
         });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
+ 
+            minprice.val(sliderrange.slider('values' , 0));
+            maxprice.val(sliderrange.slider('values' , 1));
     }); 
         
     /*-------------------------------
@@ -637,5 +644,23 @@
         showItems: 1
     });
         
+    /*--- cart table ---*/
+    $(document).on('click', '#carttable .action a',function(e){
+        e.preventDefault();
+        $(this).parent('td').parent('tr').remove();
+        if($('#carttable .action').length == 0){
+            $('#cartcontent .content').remove();
+            $('#cartcontent').append(`
+            <div class="content border rounded py-5 text-center">
+                <h3 class="py-5">Cart Empty</h3>
+                <a href="/shop">continue shopping</a>
+            </div>
+            `);
+            window.scrollTo(0,0);
+        }
+    });
+
+
+    
 })(jQuery);
 

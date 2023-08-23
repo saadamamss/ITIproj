@@ -14,7 +14,7 @@ class Product extends Model
         return $this->belongsTo(Category::class , 'cat_id');
     }
     
-    public function review(){
+    public function reviews(){
         return $this->hasMany(Review::class , 'product_id');
     }
 

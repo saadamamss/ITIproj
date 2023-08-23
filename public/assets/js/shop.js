@@ -63,35 +63,51 @@
             });
         });
         //Qty Up-Down
+        /*
         $('.detail-qty').each(function () {
             var qtyval = parseInt($(this).find('.qty-val').text(), 10);
             $('.qty-up').on('click', function (event) {
                 event.preventDefault();
+                var qtyval = parseInt($(this).prev().text());
+                if(qtyval >= 10){
+                    return;
+                }
                 qtyval = qtyval + 1;
                 $(this).prev().text(qtyval);
             });
             $('.qty-down').on('click', function (event) {
                 event.preventDefault();
-                qtyval = qtyval - 1;
-                if (qtyval > 1) {
-                    $(this).next().text(qtyval);
-                } else {
-                    qtyval = 1;
-                    $(this).next().text(qtyval);
+                var qtyval = parseInt($(this).next().text());
+                if (qtyval == 1) {
+                    return;
                 }
+                qtyval = qtyval - 1;
+                $(this).next().text(qtyval);
+
             });
         });
+        */
 
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
         });
+
+
+
     };
+
+
+
     /* WOW active */
     new WOW().init();
 
     //Load functions
     $(document).ready(function () {
         productDetails();
+
+
+
+        
     });
 
 })(jQuery);
