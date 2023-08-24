@@ -100,6 +100,7 @@ Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function () {
     Route::post('products/add', [ProductController::class, 'addProduct'])->name('addproducts');
     Route::post('product/edit', [ProductController::class, 'Productedit'])->name('productedit');
     Route::delete('product/delete/', [ProductController::class, 'Productdel'])->name('productdel');
+    Route::post('product/upload/', [ProductController::class, 'uploadproductImages'])->name('uploadproductimage');
 
     //gallery
     Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');

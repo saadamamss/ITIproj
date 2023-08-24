@@ -29,6 +29,9 @@ class ProductController extends Controller
 
     public function addProduct(Request $request)
     {
+
+
+
         if ($request->isMethod('post') && $request->ajax()) {
             $validated = $request->validate([
                 'name' => 'required|string|min:1|max:100',
@@ -39,6 +42,8 @@ class ProductController extends Controller
                 'category' => 'required|string',
                 'stock' => 'required|string',
                 'featured' => 'required|boolean',
+                'product_image' => 'required',
+                'attaches' => 'nullable'
             ]);
 
 
@@ -49,20 +54,25 @@ class ProductController extends Controller
                 $product->name = $request->input('name');
                 $product->slug = Str::slug($request->input('name'));
                 $product->price = $request->input('price');
-                $product->sale_price = $request->input('sale_price');
+                if ($request->input('sale_price')) {
+                    $product->sale_price = $request->input('sale_price');
+                }
+
                 $product->quantity = $request->input('quantity');
                 $product->desc = $request->input('desc');
                 $product->stock = $request->input('stock');
                 $product->featured = $request->input('featured');
-                $product->image = "product.png";
-                $product->images = Null;
-                $product->rating = 0;
+                $product->image = $request->input('product_image');
+                if ($request->input('attaches')) {
+                    $product->images = $request->input('attaches');
+                }
+                $product->rating = '0';
                 $product->cat_id = $request->input('category');
 
                 $product->save();
                 return response()->json(true);
-            } catch (Exception $exc) {
-                return response()->json(false);
+            } catch (\Throwable $exc) {
+                return response()->json($exc);
             }
         }
     }
@@ -88,6 +98,7 @@ class ProductController extends Controller
     {
 
         //return $request->input();
+
         if ($request->isMethod('post') && $request->ajax()) {
             $validated = $request->validate([
                 'product_id' => 'required|numeric',
@@ -99,9 +110,9 @@ class ProductController extends Controller
                 'category' => 'required|string',
                 'stock' => 'required|string',
                 'featured' => 'required|boolean',
+                'product_image' => 'nullable',
+                'attaches' => 'nullable'
             ]);
-
-
 
 
             try {
@@ -117,6 +128,13 @@ class ProductController extends Controller
                 $product->cat_id = $request->input('category');
                 $product->stock = $request->input('stock');
                 $product->featured = $request->input('featured');
+                if ($request->product_image) {
+                    $product->image = $request->input('product_image');
+                }
+                if ($request->attaches) {
+                    $product->images = $request->input('attaches');
+                }
+
 
                 $product->save();
                 return response()->json(true);
@@ -126,6 +144,30 @@ class ProductController extends Controller
         }
     }
 
+    public function uploadproductImages(Request $request)
+    {
+
+        try {
+            $request->validate([
+                'product_image' => 'nullable|image',
+                'attaches.*' => "nullable|image",
+            ]);
+            if ($request->file('product_image')) {
+                $product_image = $request->file('product_image')->getClientOriginalName();
+                $request->file('product_image')->storeAs('shop', $product_image, 'upload');
+            }
+
+            if ($request->file('attaches')) {
+                foreach ($request->file('attaches') as $key => $value) {
+                    $value->storeAs('shop', $value->getClientOriginalName(), 'upload');
+                }
+            }
+
+            return response()->json(true);
+        } catch (\Throwable $th) {
+            return response()->json(false);
+        }
+    }
     public function Productdel(Request $request)
     {
 

@@ -96,7 +96,7 @@
                                     <input type="text" id="name" name="name"
                                         class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
                                         required autofocus />
-                                    <span class="text-danger" id="error_name"></span>
+                                    <span class="error text-danger" id="error_name"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -104,7 +104,7 @@
                                     <input type="file" id="image" name="image"
                                         class="form-control @error('image') is-invalid @enderror"
                                         value="{{ old('image') }}" required />
-                                    <span class="text-danger" id="error_image"></span>
+                                    <span class="error text-danger" id="error_image"></span>
                                 </div>
 
 
@@ -195,6 +195,7 @@
                 form.action = `{{ route('catg.add') }}`;
                 form.submit.value = 'Add';
                 form.reset();
+                $('.error').text("");
                 $('#addcategoryModalLabel').text('Add New category');
                 showmodal();
             });

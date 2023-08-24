@@ -117,8 +117,8 @@
 
                             </div>
                             <div class="row m-0">
-                                {{--
-                                @forelse ($files as $item)
+                                
+                                @forelse ($galleries as $item)
                                     <div class="img-card col-md-4 col-sm-6 col-12">
                                         <p>
                                             <input type="checkbox" class="form-check-input" name="photos[]"
@@ -154,20 +154,8 @@
 
                                     <h5 align="center">NO Images In Gallery</h5>
                                 @endforelse
-                                    --}}
+                                    
 
-                                <ul>
-                                    @forelse ($files as $file)
-                                        <li>
-
-                                            <img src="{{ asset('assets/imgs/') . '/' . $file }}" alt=""
-                                                width="100px" height="100px">
-                                            <span>{{$file}}</span>
-
-                                        </li>
-                                    @empty
-                                    @endforelse
-                                </ul>
                             </div>
                         </div>
                     </div>
