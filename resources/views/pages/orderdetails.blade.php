@@ -22,8 +22,9 @@
                                 <tr>
                                     <th>no</th>
                                     <th>name</th>
-                                    <th>quantity</th>
                                     <th>price</th>
+                                    <th>quantity</th>
+                                    <th>subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,8 +38,9 @@
                                             <a
                                                 href="{{ route('product.details', $item->product->slug) }}">{{ $item->product->name }}</a>
                                         </td>
-                                        <td>{{ $item->quantity }}</td>
                                         <td>${{ $item->price }}</td>
+                                        <td>{{ $item->quantity }}</td>
+                                        <td>${{ $item->quantity * $item->price }}</td>
                                     </tr>
                                 @empty
                                     <h3 align="center">No Orders</h3>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerOrders;
 use App\Http\Controllers\ProductDetails;
 use App\Http\Controllers\ShopController;
@@ -48,12 +49,9 @@ Route::get('product/{slug}', [ProductDetails::class, 'index'])->name("product.de
 
 
 
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name("contact");
-Route::get('/blog', function () {
-    return view('pages.blog');
-})->name("blog");
+Route::get('/contact', [ContactController::class , 'index'])->name("contact");
+Route::post('/contact/send', [ContactController::class , 'send'])->name("sendmessage");
+
 Route::get('/about', function () {
     return view('pages.about');
 })->name("about");
@@ -128,4 +126,7 @@ Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('order/{id}', [OrderController::class, 'orderDetials'])->name('order.details')->whereNumber('id');
     Route::post('order/status', [OrderController::class, 'orderStatus'])->name('order.status');
+    Route::get('contacts', function(){
+        return view('admin.pages.contacts');
+    })->name('contact.index');
 });

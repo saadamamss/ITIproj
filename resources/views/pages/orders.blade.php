@@ -18,6 +18,7 @@
                     <h2 class="py-5">Your Orders</h2>
 
                     <div class="col-12">
+                        
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -43,11 +44,14 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <h3 align="center">No Orders</h3>
+                                    <tr>
+                                        <td colspan="4"><h3 align="center">No Orders</h3></td>
+                                    </tr>
                                 @endforelse
 
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

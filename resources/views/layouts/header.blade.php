@@ -10,11 +10,11 @@
                                 <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i
                                         class="fi-rs-angle-small-down"></i></a>
                                 <ul class="language-dropdown">
-                                    <li><a href="#"><img src="{{asset('assets/imgs/theme/flag-fr.png')}}"
+                                    <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-fr.png') }}"
                                                 alt="">Français</a></li>
-                                    <li><a href="#"><img src="{{asset('assets/imgs/theme/flag-dt.png')}}"
+                                    <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-dt.png') }}"
                                                 alt="">Deutsch</a></li>
-                                    <li><a href="#"><img src="{{asset('assets/imgs/theme/flag-ru.png')}}"
+                                    <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-ru.png') }}"
                                                 alt="">Pусский</a></li>
                                 </ul>
                             </li>
@@ -64,29 +64,25 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}"
+                            alt="logo"></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
-                        <form action="{{route('product.search')}}" method="get">
-                        
+                        <form action="{{ route('product.search') }}" method="get">
+
                             <input type="search" name="q" placeholder="Search for items...">
                         </form>
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
+
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.php">
-                                    <img class="svgInject" alt="Surfside Media"
-                                        src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
-                                    <span class="pro-count blue">4</span>
-                                </a>
-                            </div>
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="{{route('cart')}}">
-                                    <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-cart.svg')}}">
+                                <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                    <img alt="Surfside Media"
+                                        src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                     <span class="pro-count blue" id="cartitemscount">
-                                        {{Cart::instance('cart')->content()->count()}}
+                                        {{ Cart::instance('cart')->content()->count() }}
                                     </span>
                                 </a>
                             </div>
@@ -102,7 +98,8 @@
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}"
+                            alt="logo"></a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
@@ -115,7 +112,7 @@
                                 @forelse ($catgs as $cat)
                                     @if (count($cat->subcategory) > 0)
                                         <li class="has-children">
-                                            <a href="{{route('category.shop',$cat->slug) }}"><i
+                                            <a href="{{ route('category.shop', $cat->slug) }}"><i
                                                     class="surfsidemedia-font-dress"></i>{{ $cat->name }}</a>
                                             <div class="dropdown-menu">
                                                 <ul class="mega-menu d-lg-flex">
@@ -139,7 +136,7 @@
                                                     </li>
                                                     <li class="mega-menu-col col-lg-5">
                                                         <div class="header-banner2">
-                                                            <img src="{{asset('assets/imgs/banner/menu-banner-2.jpg')}}"
+                                                            <img src="{{ asset('assets/imgs/banner/menu-banner-2.jpg') }}"
                                                                 alt="menu_banner1">
                                                             <div class="banne_info">
                                                                 <h6>10% Off</h6>
@@ -148,7 +145,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="header-banner2">
-                                                            <img src="{{asset('assets/imgs/banner/menu-banner-3.jpg')}}"
+                                                            <img src="{{ asset('assets/imgs/banner/menu-banner-3.jpg') }}"
                                                                 alt="menu_banner2">
                                                             <div class="banne_info">
                                                                 <h6>15% Off</h6>
@@ -178,30 +175,34 @@
                                 <li></li>
                                 <li><a class="@if ($_SERVER['REQUEST_URI'] == '/') active @endif"
                                         href="{{ route('home') }}">Home </a></li>
-                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/shop') active @endif" href="{{ Route('shop') }}">Shop</a></li>
+                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/shop') active @endif"
+                                        href="{{ Route('shop') }}">Shop</a></li>
 
 
-                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/blog') active @endif" href="{{ route('blog') }}">Blog </a></li>
-                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/about') active @endif" href="{{route('about')}}">About</a></li>
-                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/contact') active @endif" href="{{ route('contact') }}">Contact</a></li>
+                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/cart') active @endif"
+                                        href="{{ route('cart') }}">Cart </a></li>
+                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/about') active @endif"
+                                        href="{{ route('about') }}">About</a></li>
+                                <li><a class="@if ($_SERVER['REQUEST_URI'] == '/contact') active @endif"
+                                        href="{{ route('contact') }}">Contact</a></li>
 
                                 @auth
 
                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
-                                        @php
-                                            if (Auth::user()->UType === 'ADM') {
-                                                $prefix = 'admin/';
-                                            } else {
-                                                $prefix = '';
-                                            }
-                                        @endphp
                                         <ul class="sub-menu">
-                                            <li><a href="{{ $prefix }}dashboard">Dashboard</a></li>
-                                            <li><a href="{{ $prefix }}products">Products</a></li>
-                                            <li><a href="{{ $prefix }}categories">Categories</a></li>
-                                            <li><a href="{{ $prefix }}coupon">Coupons</a></li>
-                                            <li><a href="{{ $prefix }}orders">Orders</a></li>
-                                            <li><a href="{{ $prefix }}customer">Customers</a></li>
+
+                                            @if (Auth::user()->UType === 'ADM')
+                                                <li><a href="admin/dashboard">Dashboard</a></li>
+                                                <li><a href="admin/products">Products</a></li>
+                                                <li><a href="admin/categories">Categories</a></li>
+                                                <li><a href="admin/coupon">Coupons</a></li>
+                                                <li><a href="admin/orders">Orders</a></li>
+                                                <li><a href="admin/customer">Customers</a></li>
+                                            @else
+                                                <li><a href="/orders">Orders</a></li>
+                                            @endif
+
+
                                             <li>
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf
@@ -222,21 +223,16 @@
                     <p><i class="fi-rs-smartphone"></i><span>Toll Free</span>{{ $mainsettings->phone }}</p>
                 </div>
                 <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
-                
+
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
+
                         <div class="header-action-icon-2">
-                            <a href="shop-wishlist.php">
-                                <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-heart.svg')}}">
-                                <span class="pro-count white">4</span>
-                            </a>
-                        </div>
-                        <div class="header-action-icon-2">
-                            <a class="mini-cart-icon" href="{{route('cart')}}">
-                                <img alt="Surfside Media" src="{{asset('assets/imgs/theme/icons/icon-cart.svg')}}">
+                            <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                 <span class="pro-count white">2</span>
                             </a>
-              
+
                         </div>
                         <div class="header-action-icon-2 d-block d-lg-none">
                             <div class="burger-icon burger-icon-white">
@@ -255,7 +251,8 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
-                <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}" alt="logo"></a>
+                <a href="/"><img src="{{ asset('assets/imgs/logo/') . '/' . $mainsettings->sitelogo }}"
+                        alt="logo"></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">
@@ -369,11 +366,16 @@
             </div>
             <div class="mobile-social-icon">
                 <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                <a href="#"><img src="{{asset('assets/imgs/theme/icons/icon-facebook.svg')}}" alt=""></a>
-                <a href="#"><img src="{{asset('assets/imgs/theme/icons/icon-twitter.svg')}}" alt=""></a>
-                <a href="#"><img src="{{asset('assets/imgs/theme/icons/icon-instagram.svg')}}" alt=""></a>
-                <a href="#"><img src="{{asset('assets/imgs/theme/icons/icon-pinterest.svg')}}" alt=""></a>
-                <a href="#"><img src="{{asset('assets/imgs/theme/icons/icon-youtube.svg')}}" alt=""></a>
+                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
+                        alt=""></a>
+                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}"
+                        alt=""></a>
+                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}"
+                        alt=""></a>
+                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}"
+                        alt=""></a>
+                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}"
+                        alt=""></a>
             </div>
         </div>
     </div>

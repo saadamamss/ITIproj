@@ -49,6 +49,10 @@
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('orders.index') }}"
                         aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Orders</span></a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('contact.index') }}"
+                        aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Contacts</span></a>
+                </li>
 
 
 
