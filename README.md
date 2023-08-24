@@ -7,6 +7,87 @@
 <li>run 'php artisan migrate' to create database </li>
 <li>run 'php artisan serve'</li>
 <li>open project on browser</li>
+<li>update file in 'vendor\laravel\framework\src\Illuminate\Pagination\resources\views\tailwind.blade.php' with
+    <p>@if ($paginator->hasPages())
+
+    <nav aria-label="Page navigation example">
+
+        <div>
+            <ul class="pagination justify-content-start">
+
+
+                {{-- Previous Page Link --}}
+                @if ($paginator->onFirstPage())
+                    <li class="page-item">
+                        <span class="page-link d-block" aria-disabled="true">
+                            <i class="fi-rs-angle-double-small-left"></i>
+                        </span>
+                    </li>
+                @else
+                    <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}"><i
+                                class="fi-rs-angle-double-small-left"></i></a></li>
+                @endif
+
+                {{-- Pagination Elements --}}
+                @foreach ($elements as $element)
+                    {{-- "Three Dots" Separator --}}
+                    @if (is_string($element))
+                        <span aria-disabled="true">
+                            <span
+                                class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 cursor-default leading-5">{{ $element }}</span>
+                        </span>
+                    @endif
+
+                    {{-- Array Of Links --}}
+                    @if (is_array($element))
+                        @foreach ($element as $page => $url)
+                            @if ($page == $paginator->currentPage())
+                                <li class="page-item active">
+                                    <span class="page-link">
+                                        {{ $page }}
+                                    </span>
+                                </li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $url }}">{{ $page }}</a></li>
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+
+                {{-- Next Page Link --}}
+                @if ($paginator->hasMorePages())
+                    <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}"><i
+                                class="fi-rs-angle-double-small-right"></i></a></li>
+                @else
+                    <li class="page-item">
+                        <span class="page-link">
+                            <i class="fi-rs-angle-double-small-right"></i>
+                        </span>
+                    </li>
+                @endif
+
+            </ul>
+        </div>
+        <div class="py-3">
+            <p class="text-sm text-gray-700 leading-5">
+                {!! __('Showing') !!}
+                @if ($paginator->firstItem())
+                    <span class="font-medium">{{ $paginator->firstItem() }}</span>
+                    {!! __('to') !!}
+                    <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                @else
+                    {{ $paginator->count() }}
+                @endif
+                {!! __('of') !!}
+                <span class="font-medium">{{ $paginator->total() }}</span>
+                {!! __('results') !!}
+            </p>
+        </div>
+    </nav>
+@endif
+</p>
+</li>
 </ul>
 <br>
 <hr>

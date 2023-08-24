@@ -117,7 +117,7 @@
 
                             </div>
                             <div class="row m-0">
-                                
+
                                 @forelse ($galleries as $item)
                                     <div class="img-card col-md-4 col-sm-6 col-12">
                                         <p>
@@ -138,12 +138,12 @@
                                         </p>
 
                                         <div class="img">
-                                           
+
                                             <img src="{{ asset($item->path . '/' . $item->image) }}" width="100%"
                                                 height="200px" alt="">
-                                           
 
-                           
+
+
                                         </div>
                                         <div class="img-title text-center py-2">
                                             <span>{{ $item->title }}</span>
@@ -154,7 +154,7 @@
 
                                     <h5 align="center">NO Images In Gallery</h5>
                                 @endforelse
-                                    
+
 
                             </div>
                         </div>
