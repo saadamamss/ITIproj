@@ -14,8 +14,8 @@
                                     <h2 class="animated fw-900">Supper value deals</h2>
                                     <h1 class="animated fw-900 text-brand">On all products</h1>
                                     <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-brush btn-brush-3"
-                                        href="{{-- route('product.details', $product->slug) --}}"> Shop Now </a>
+                                    <a class="animated btn btn-brush btn-brush-3" href="{{-- route('product.details', $product->slug) --}}"> Shop Now
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -35,8 +35,7 @@
                                     <h2 class="animated fw-900">Fashion Trending</h2>
                                     <h1 class="animated fw-900 text-7">Great Collection</h1>
                                     <p class="animated">Save more with coupons & up to 20% off</p>
-                                    <a class="animated btn btn-brush btn-brush-2"
-                                        href="{{-- route('product.details', $product->slug) --}}"> Discover Now
+                                    <a class="animated btn btn-brush btn-brush-2" href="{{-- route('product.details', $product->slug) --}}"> Discover Now
                                     </a>
                                 </div>
                             </div>
@@ -155,18 +154,33 @@
                                                     href="{{ route('product.details', $product->slug) }}">{{ substr($product->name, 0, 20) }}...</a>
                                             </h2>
                                             <div>
-                                                @for ($i = 0; $i < $product->rating; $i++)
+                                                @php
+                                                    $totalrate = count($product->reviews) * 5;
+                                                    $acualrate = 0;
+                                                    if ($totalrate > 0) {
+                                                        foreach ($product->reviews as $review) {
+                                                            $acualrate += $review->rate;
+                                                        }
+                                                        $percent = $acualrate / $totalrate;
+                                                    } else {
+                                                        $percent = 0;
+                                                    }
+                                                    $starrate = intval($percent * 5);
+                                                @endphp
+
+                                                @for ($i = 0; $i < $starrate; $i++)
                                                     <i class="rating-result"></i>
                                                 @endfor
 
-                                                @for ($i = 0; $i < 5 - $product->rating; $i++)
+                                                @for ($i = 0; $i < 5 - $starrate; $i++)
                                                     <i class="rating-result dark"></i>
                                                 @endfor
 
 
                                                 <span>
-                                                    <span>{{ ($product->rating / 5) * 100 }}%</span>
+                                                    <span>{{ intval($percent * 100) }}%</span>
                                                 </span>
+
                                             </div>
                                             <div class="product-price">
                                                 @if (is_null($product->sale_price))
@@ -229,18 +243,33 @@
                                                     href="{{ route('product.details', $product->slug) }}">{{ substr($product->name, 0, 20) }}...</a>
                                             </h2>
                                             <div>
-                                                @for ($i = 0; $i < $product->rating; $i++)
+                                                @php
+                                                    $totalrate = count($product->reviews) * 5;
+                                                    $acualrate = 0;
+                                                    if ($totalrate > 0) {
+                                                        foreach ($product->reviews as $review) {
+                                                            $acualrate += $review->rate;
+                                                        }
+                                                        $percent = $acualrate / $totalrate;
+                                                    } else {
+                                                        $percnet = 0;
+                                                    }
+                                                    $starrate = intval($percent * 5);
+                                                @endphp
+
+                                                @for ($i = 0; $i < $starrate; $i++)
                                                     <i class="rating-result"></i>
                                                 @endfor
 
-                                                @for ($i = 0; $i < 5 - $product->rating; $i++)
+                                                @for ($i = 0; $i < 5 - $starrate; $i++)
                                                     <i class="rating-result dark"></i>
                                                 @endfor
 
 
                                                 <span>
-                                                    <span>{{ ($product->rating / 5) * 100 }}%</span>
+                                                    <span>{{ intval($percent * 100) }}%</span>
                                                 </span>
+
                                             </div>
                                             <div class="product-price">
                                                 @if (is_null($product->sale_price))
@@ -302,18 +331,35 @@
                                                     href="{{ route('product.details', $product->slug) }}">{{ substr($product->name, 0, 20) }}...</a>
                                             </h2>
                                             <div>
-                                                @for ($i = 0; $i < $product->rating; $i++)
-                                                    <i class="rating-result"></i>
-                                                @endfor
+                                                <div>
+                                                    @php
+                                                        $totalrate = count($product->reviews) * 5;
+                                                        $acualrate = 0;
+                                                        if ($totalrate > 0) {
+                                                            foreach ($product->reviews as $review) {
+                                                                $acualrate += $review->rate;
+                                                            }
+                                                            $percent = $acualrate / $totalrate;
+                                                        } else {
+                                                            $percnet = 0;
+                                                        }
+                                                        $starrate = intval($percent * 5);
+                                                    @endphp
 
-                                                @for ($i = 0; $i < 5 - $product->rating; $i++)
-                                                    <i class="rating-result dark"></i>
-                                                @endfor
+                                                    @for ($i = 0; $i < $starrate; $i++)
+                                                        <i class="rating-result"></i>
+                                                    @endfor
+
+                                                    @for ($i = 0; $i < 5 - $starrate; $i++)
+                                                        <i class="rating-result dark"></i>
+                                                    @endfor
 
 
-                                                <span>
-                                                    <span>{{ ($product->rating / 5) * 100 }}%</span>
-                                                </span>
+                                                    <span>
+                                                        <span>{{ intval($percent * 100) }}%</span>
+                                                    </span>
+
+                                                </div>
                                             </div>
                                             <div class="product-price">
                                                 @if (is_null($product->sale_price))
@@ -448,18 +494,33 @@
                                             href="{{ route('product.details', $product->slug) }}">{{ substr($product->name, 0, 20) }}</a>
                                     </h2>
                                     <div>
-                                        @for ($i = 0; $i < $product->rating; $i++)
+                                        @php
+                                            $totalrate = count($product->reviews) * 5;
+                                            $acualrate = 0;
+                                            if ($totalrate > 0) {
+                                                foreach ($product->reviews as $review) {
+                                                    $acualrate += $review->rate;
+                                                }
+                                                $percent = $acualrate / $totalrate;
+                                            } else {
+                                                $percnet = 0;
+                                            }
+                                            $starrate = intval($percent * 5);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $starrate; $i++)
                                             <i class="rating-result"></i>
                                         @endfor
 
-                                        @for ($i = 0; $i < 5 - $product->rating; $i++)
+                                        @for ($i = 0; $i < 5 - $starrate; $i++)
                                             <i class="rating-result dark"></i>
                                         @endfor
 
 
                                         <span>
-                                            <span>{{ ($product->rating / 5) * 100 }}%</span>
+                                            <span>{{ intval($percent * 100) }}%</span>
                                         </span>
+
                                     </div>
                                     <div class="product-price">
                                         @if (is_null($product->sale_price))

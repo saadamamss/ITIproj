@@ -660,7 +660,16 @@
         }
     });
 
+    /** */
 
-    
+    $(document).on('change' , '.addrate .rate' , function(){
+        $('.addrate .rate').removeClass('active');
+        $(this).addClass('active');
+        $(this).prevAll().addClass('active');
+
+    });
+
+
+        
 })(jQuery);
 

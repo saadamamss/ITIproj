@@ -158,7 +158,7 @@
                                             </div>
                                         </li>
                                     @else
-                                        <li><a href="category/{{ $cat->slug }}"><i
+                                        <li><a href="{{route('category.shop' , $cat->slug)}}"><i
                                                     class="surfsidemedia-font-desktop"></i>{{ $cat->name }}</a>
                                         </li>
                                     @endif

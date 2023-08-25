@@ -37,7 +37,7 @@
                                             <th>id</th>
                                             <th>total</th>
                                             <th>item count</th>
-                                            <th>user</th>
+                                            <th>Customer</th>
                                             <th>status</th>
                                             <th>Action</th>
                                         </tr>

@@ -35,17 +35,18 @@ Route::get('/shop', [ShopController::class, 'index'])->name("shop");
 Route::get('/cart', [CartController::class, 'index'])->name("cart");
 
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name("addtocart");
-Route::post('/cart/del', [CartController::class, 'deleteItem'])->name("cart.delitem");
-Route::post('/cart/destroy', [CartController::class, 'clearCart'])->name("cart.destroy");
-Route::post('/cart/update', [CartController::class, 'updateCart'])->name("cart.update");
-Route::post('/cart/coupon', [CartController::class, 'applyCoupon'])->name("applycoupon");
+Route::post('cart/add', [CartController::class, 'addToCart'])->name("addtocart");
+Route::post('cart/del', [CartController::class, 'deleteItem'])->name("cart.delitem");
+Route::post('cart/destroy', [CartController::class, 'clearCart'])->name("cart.destroy");
+Route::post('cart/update', [CartController::class, 'updateCart'])->name("cart.update");
+Route::post('cart/coupon', [CartController::class, 'applyCoupon'])->name("applycoupon");
 
 
-Route::get('/category/{slug}', [ShopController::class, 'shopByCategory'])->name("category.shop");
+Route::get('category/{slug}', [ShopController::class, 'shopByCategory'])->name("category.shop");
 
 Route::get('products/search', [ShopController::class, 'search'])->name("product.search");
 Route::get('product/{slug}', [ProductDetails::class, 'index'])->name("product.details");
+Route::post('product/addreview/{id}', [ProductDetails::class, 'addReview'])->name("addreview")->whereNumber('id');
 
 
 

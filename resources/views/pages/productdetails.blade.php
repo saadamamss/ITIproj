@@ -5,9 +5,9 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Fashion
-                    <span></span> Abstract Print Patchwork Dress
+                    <a href="/" rel="nofollow">Home</a>
+                    <span></span> <a href="/shop" rel="nofollow">Shop</a>
+                    <span></span> {{ $product->name }}
                 </div>
             </div>
         </div>
@@ -22,51 +22,20 @@
                                         <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                         <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image">
-                                            </figure>
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <figure class="border-radius-10">
+                                                    <img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
+                                                        alt="product image">
+                                                </figure>
+                                            @endfor
                                         </div>
                                         <!-- THUMBNAILS -->
                                         <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
-                                                    alt="product image"></div>
+
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <div><img src="{{ asset('assets/imgs/shop') . '/' . $product->image }}"
+                                                        alt="product image"></div>
+                                            @endfor
                                         </div>
                                     </div>
                                     <!-- End Gallery -->
@@ -77,19 +46,32 @@
                                         <h2 class="title-detail">{{ $product->name }}</h2>
                                         <div class="product-detail-rating">
 
-                                            <div class="">
-                                                @for ($i = 0; $i < $product->rating; $i++)
+                                            <div>
+                                                @php
+                                                    $totalrate = count($product->reviews) * 5;
+                                                    $acualrate = 0;
+                                                    if ($totalrate > 0) {
+                                                        foreach ($product->reviews as $review) {
+                                                            $acualrate += $review->rate;
+                                                        }
+                                                    }
+                                                    $percent = $acualrate / $totalrate;
+                                                    $starrate = intval($percent * 5);
+                                                @endphp
+
+                                                @for ($i = 0; $i < $starrate; $i++)
                                                     <i class="rating-result"></i>
                                                 @endfor
 
-                                                @for ($i = 0; $i < 5 - $product->rating; $i++)
+                                                @for ($i = 0; $i < 5 - $starrate; $i++)
                                                     <i class="rating-result dark"></i>
                                                 @endfor
 
 
                                                 <span>
-                                                    <span>{{ ($product->rating / 5) * 100 }}%</span>
+                                                    <span>{{ intval($percent * 100) }}%</span>
                                                 </span>
+
                                             </div>
 
                                         </div>
@@ -103,7 +85,7 @@
                                                     <ins><span
                                                             class="old-price font-md ml-15">${{ $product->price }}</span></ins>
                                                     <span
-                                                        class="save-price  font-md color3 ml-15">{{ number_format((1 - $product->sale_price / $product->price) * 100, 0) }}%
+                                                        class="save-price  font-md color3 ml-15">{{ intval((1 - $product->sale_price / $product->price) * 100) }}%
                                                         Off</span>
                                                 @endif
                                             </div>
@@ -197,7 +179,8 @@
 
                                     <li class="nav-item">
                                         <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab"
-                                            href="#Reviews">Reviews ({{ count($product->reviews) }})</a>
+                                            href="#Reviews">Reviews
+                                            ({{ count($product->reviews) }})</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
@@ -209,7 +192,7 @@
                                         <!--Comments-->
                                         <div class="comments-area">
                                             <div class="row">
-                                                <div class="col-lg-8">
+                                                <div class="col-lg-8" id="reviewscont">
                                                     <h4 class="mb-30">Customer questions & answers</h4>
                                                     @forelse ($product->reviews as $review)
                                                         <div class="comment-list">
@@ -218,15 +201,28 @@
                                                                     <div class="thumb text-center">
                                                                         <img src="{{ asset('assets/imgs/page/avatar-6.jpg') }}"
                                                                             alt="">
+
                                                                         <h6><a
                                                                                 href="#">{{ $review->user->name }}</a>
                                                                         </h6>
                                                                     </div>
                                                                     <div class="desc">
-                                                                        <div class="product-rate d-inline-block">
-                                                                            <div class="product-rating" style="width:90%">
+
+                                                                        <div class="product-detail-rating d-inline-block">
+
+                                                                            <div class="">
+                                                                                @for ($i = 0; $i < $review->rate; $i++)
+                                                                                    <i class="rating-result"></i>
+                                                                                @endfor
+
+                                                                                @for ($i = 0; $i < 5 - $review->rate; $i++)
+                                                                                    <i class="rating-result dark"></i>
+                                                                                @endfor
+
                                                                             </div>
+
                                                                         </div>
+
                                                                         <p>
                                                                             {{ $review->review }}
                                                                         </p>
@@ -300,31 +296,43 @@
                                         </div>
                                         <!--comment form-->
                                         @auth
-                                            <div class="comment-form">
-                                                <h4 class="mb-15">Add a review</h4>
-                                                <div class="product-rate d-inline-block mb-30">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-8 col-md-12">
-                                                        <form class="form-contact comment_form" action="#"
-                                                            id="commentForm">
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                                                            placeholder="Write Comment"></textarea>
+                                            <form method="post" id="addreviewForm">
+                                                <div class="comment-form">
+                                                    <h4 class="mb-15">Add a review</h4>
+                                                    <div class="d-inline-flex mb-30 addrate">
+                                                        <input type="radio" name="rate" class="rate" data-value="1"
+                                                            value="1">
+                                                        <input type="radio" name="rate" class="rate" data-value="2"
+                                                            value="2">
+                                                        <input type="radio" name="rate" class="rate" data-value="3"
+                                                            value="3">
+                                                        <input type="radio" name="rate" class="rate" data-value="4"
+                                                            value="4">
+                                                        <input type="radio" name="rate" class="rate" data-value="5"
+                                                            value="5">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-8 col-md-12">
+                                                            <form class="form-contact comment_form" action="#"
+                                                                id="commentForm">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                                                                placeholder="Write Comment" required></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="submit"
-                                                                    class="button button-contactForm">Submit
-                                                                    Review</button>
-                                                            </div>
-                                                        </form>
+                                                                <div class="form-group">
+                                                                    <button type="submit"
+                                                                        class="button button-contactForm">Submit
+                                                                        Review</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         @endauth
 
 
@@ -415,4 +423,88 @@
             </div>
         </section>
     </main>
+@endsection
+@section('scripts')
+    @auth
+        <script>
+            $(document).on('submit', '#addreviewForm', function(e) {
+                e.preventDefault();
+                const _this = $(this)[0];
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('addreview', $product->id) }}",
+                    type: "post",
+                    data: $(this).serialize(),
+                    datatype: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response === true) {
+
+                            $('#reviewscont').append(appendreview(parseInt(_this.elements.rate.value), _this
+                                .elements
+                                .comment.value));
+
+                            $('.rate').removeClass('active');
+                            _this.reset();
+
+                        }
+                    },
+                    error: function(res) {
+                        var errors = res.responseJSON.errors;
+                        console.log(errors);
+
+                    }
+                });
+            });
+
+
+
+            function appendreview(rate, comment) {
+
+                var html = `<div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb text-center">
+                                        <img src="{{ asset('assets/imgs/page/avatar-6.jpg') }}" alt="">
+                                        <h6><a href="#">{{ Auth::user()->name }}</a>
+                                        </h6>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="product-detail-rating d-inline-block">
+                                            <div class="">`;
+
+                for (let i = 0; i < rate; i++) {
+                    html += `<i class="rating-result"></i>`;
+                }
+
+
+                for (let i = 0; i < (5 - rate); i++) {
+                    html += `<i class="rating-result dark"></i>`;
+                }
+
+                html += `</div>
+                         </div>
+                            <p>${comment}</p>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <p class="font-xs mr-30">
+                                        {{ Carbon\Carbon::now()->format('M d Y') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>`;
+
+
+                return html;
+            }
+        </script>
+    @endauth
 @endsection
