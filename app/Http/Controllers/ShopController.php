@@ -35,6 +35,7 @@ class ShopController extends Controller
         $products = $products->paginate(12);
 
         return view('pages.shop')->with(['products' => $products, 'catgs' => $categories]);
+        
     }
 
     public function search(Request $request)
@@ -59,7 +60,7 @@ class ShopController extends Controller
         }
 
         if ($request->size) {
-            $products = $products->where('color', $request->size);
+            $products = $products->where('size', $request->size);
         }
 
 

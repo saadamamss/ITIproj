@@ -38,6 +38,8 @@ class ProductDetails extends Controller
         $review->review = $request->comment;
 
         $review->save();
+
         return response()->json(true);
+        
     }
 }

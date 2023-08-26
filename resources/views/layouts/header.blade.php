@@ -192,12 +192,12 @@
                                         <ul class="sub-menu">
 
                                             @if (Auth::user()->UType === 'ADM')
-                                                <li><a href="admin/dashboard">Dashboard</a></li>
-                                                <li><a href="admin/products">Products</a></li>
-                                                <li><a href="admin/categories">Categories</a></li>
-                                                <li><a href="admin/coupon">Coupons</a></li>
-                                                <li><a href="admin/orders">Orders</a></li>
-                                                <li><a href="admin/customer">Customers</a></li>
+                                                <li><a href="/admin/dashboard">Dashboard</a></li>
+                                                <li><a href="/admin/products">Products</a></li>
+                                                <li><a href="/admin/categories">Categories</a></li>
+                                                <li><a href="/admin/coupon">Coupons</a></li>
+                                                <li><a href="/admin/orders">Orders</a></li>
+                                                <li><a href="/admin/customer">Customers</a></li>
                                             @else
                                                 <li><a href="/orders">Orders</a></li>
                                             @endif

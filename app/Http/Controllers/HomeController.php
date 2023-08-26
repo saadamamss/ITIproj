@@ -28,7 +28,7 @@ class HomeController extends Controller
         $featured = Product::where('featured', 1)->limit(8)->get();
         $popular = Product::where('rating', '>=', 3)->limit(8)->get();
         $newadded = Product::orderBy('created_at')->limit(8)->get();
-
+        
         $popularcat = Category::limit(12)->get();
 
 

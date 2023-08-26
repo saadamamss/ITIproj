@@ -23,7 +23,6 @@ class CategoryController extends Controller
         if ($request->isMethod('post') && $request->ajax()) {
             $request->validate([
                 'name' => 'required|string|max:60',
-                'image' => 'required|image'
             ]);
 
             try {
@@ -32,11 +31,8 @@ class CategoryController extends Controller
 
                 $catg->name = $request->name;
                 $catg->slug = Str::slug($request->name);
+                $catg->image = "xvzbvxzb.jpg";
 
-
-                $imgName = $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('shop', $imgName, 'upload');
-                $catg->image = $imgName;
 
                 $catg->save();
                 return response()->json(true);
@@ -53,7 +49,7 @@ class CategoryController extends Controller
                 [
                     'category_id' => 'required|numeric',
                     'name' => 'required|string|max:60',
-                    'image' => 'nullable|image'
+
                 ]
             );
 
@@ -62,13 +58,9 @@ class CategoryController extends Controller
                 $catg->name = $request->name;
                 $catg->slug = Str::slug($request->name);
 
-                if ($request->file('image')) {
-                    $imgName = $request->file('image')->getClientOriginalName();
-                    $request->file('image')->storeAs('shop', $imgName, 'upload');
-                    $catg->image = $imgName;
-                }
 
                 $catg->save();
+                
                 return response()->json(true);
             } catch (\Throwable $th) {
                 return response()->json(false);

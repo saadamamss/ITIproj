@@ -44,7 +44,7 @@ class CartController extends Controller
         if ($request->isMethod('post') && $request->ajax()) {
 
             try {
-                Cart::instance('cart')->add($request->id, $request->name, $request->qty, $request->price)->associate('App\Models\Product');
+                Cart::instance('cart')->add($request->id, $request->name, $request->qty , $request->price)->associate('App\Models\Product');
 
                 return Cart::instance('cart')->content()->count();
             } catch (\Throwable $th) {
@@ -59,6 +59,7 @@ class CartController extends Controller
 
             try {
                 Cart::instance('cart')->remove($request->rowId);
+
                 return response()->json([
                     Cart::instance('cart')->subtotal(),
                     Cart::instance('cart')->total(),
@@ -97,6 +98,8 @@ class CartController extends Controller
                     session()->put('coupon', $coupon);
 
                     return response()->json(true);
+                    
+                    
                 } else {
                     return 'increase the cart value';
                 }

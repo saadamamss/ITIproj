@@ -42,6 +42,7 @@ class CheckoutController extends Controller
             $cart = Cart::instance('cart');
 
             $order->tax = preg_replace('/,/i', '', $cart->tax());
+            
             if (session('coupon')) {
                 if (session('coupon')->type === 'fixed') {
                     $discount = session('coupon')->value;
@@ -70,8 +71,8 @@ class CheckoutController extends Controller
 
             $trans->save();
 
+            
             //order items
-
             $items = $cart->content();
             foreach ($items as $key => $value) {
                 $orderitem = new OrderItem();

@@ -99,14 +99,6 @@
                                     <span class="error text-danger" id="error_name"></span>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="image">image:</label>
-                                    <input type="file" id="image" name="image"
-                                        class="form-control @error('image') is-invalid @enderror"
-                                        value="{{ old('image') }}" required />
-                                    <span class="error text-danger" id="error_image"></span>
-                                </div>
-
 
                                 <input type="hidden" id="category_id" name="category_id" />
                             </div>
@@ -198,6 +190,7 @@
                 $('.error').text("");
                 $('#addcategoryModalLabel').text('Add New category');
                 showmodal();
+                
             });
 
 

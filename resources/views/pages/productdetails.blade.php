@@ -54,8 +54,10 @@
                                                         foreach ($product->reviews as $review) {
                                                             $acualrate += $review->rate;
                                                         }
+                                                        $percent = $acualrate / $totalrate;
+                                                    } else {
+                                                        $percent = 0;
                                                     }
-                                                    $percent = $acualrate / $totalrate;
                                                     $starrate = intval($percent * 5);
                                                 @endphp
 
@@ -185,7 +187,9 @@
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
                                     <div class="tab-pane fade show active" id="Description">
+                                        
                                         {{ $product->desc }}
+
                                     </div>
 
                                     <div class="tab-pane fade" id="Reviews">

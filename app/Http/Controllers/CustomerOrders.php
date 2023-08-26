@@ -14,6 +14,8 @@ class CustomerOrders extends Controller
         $orders = Auth::user()->orders;
         return view('pages.orders')->with(['orders' => $orders]);
     }
+
+    
     public function orderDetails($id)
     {
         try {

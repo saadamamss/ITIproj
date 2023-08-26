@@ -31,10 +31,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/shop', [ShopController::class, 'index'])->name("shop");
+
+
 Route::get('/cart', [CartController::class, 'index'])->name("cart");
-
-
 Route::post('cart/add', [CartController::class, 'addToCart'])->name("addtocart");
 Route::post('cart/del', [CartController::class, 'deleteItem'])->name("cart.delitem");
 Route::post('cart/destroy', [CartController::class, 'clearCart'])->name("cart.destroy");
@@ -50,8 +52,8 @@ Route::post('product/addreview/{id}', [ProductDetails::class, 'addReview'])->nam
 
 
 
-Route::get('/contact', [ContactController::class , 'index'])->name("contact");
-Route::post('/contact/send', [ContactController::class , 'send'])->name("sendmessage");
+Route::get('/contact', [ContactController::class, 'index'])->name("contact");
+Route::post('/contact/send', [ContactController::class, 'send'])->name("sendmessage");
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -60,19 +62,23 @@ Route::get('/about', function () {
 
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth'])->group(function () {
+    
+    /*
     Route::get('dashboard', function () {
         return '<h1>user.dashboard</h1>';
     });
+    */
+
     Route::get('orders', [CustomerOrders::class, 'index'])->name('orders.index');
     Route::get('order/{id}', [CustomerOrders::class, 'orderDetails'])->name('order.show')->whereNumber('id');
 
     Route::get('/cart/checkout', [CheckoutController::class, 'index'])->name("checkout");
     Route::post('/cart/checkout', [CheckoutController::class, 'placeOrder'])->name("placeorder");
 });
+
 
 Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function () {
 
@@ -127,7 +133,7 @@ Route::prefix('admin')->middleware(['auth', 'authadmin'])->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('order/{id}', [OrderController::class, 'orderDetials'])->name('order.details')->whereNumber('id');
     Route::post('order/status', [OrderController::class, 'orderStatus'])->name('order.status');
-    Route::get('contacts', function(){
+    Route::get('contacts', function () {
         return view('admin.pages.contacts');
     })->name('contact.index');
 });

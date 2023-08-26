@@ -222,6 +222,7 @@
             }
             qtyval = qtyval + 1;
             $(this).prev().text(qtyval);
+            
             updateCart(qtyel.data('id'), qtyval);
         });
         $('.qty-down').on('click', function(event) {
